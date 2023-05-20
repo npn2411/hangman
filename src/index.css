@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply font-poppins;
+  }
+  h1 {
+    @apply text-7xl font-extrabold;
+  }
+  p {
+    @apply text-xl;
+  }
+}
+
+@layer components {
+  .container {
+    @apply w-7xl;
+  }
+}
+
+@layer utilities {
+  .glowing {
+    text-shadow: 0 0 10px currentColor, 0 0 20px currentColor,
+      0 0 40px currentColor, 0 0 80px currentColor, 0 0 120px currentColor;
+  }
+}
