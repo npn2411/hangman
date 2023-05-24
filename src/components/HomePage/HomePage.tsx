@@ -1,18 +1,21 @@
-import hangman from '../../assets/image/hangman_title.png';
+import { hangman } from '../../assets/image/';
 
 interface Props {
   handleStarGame: () => void;
 }
 
 export default function HomePage({ handleStarGame }: Props) {
-  console.log('HomePage');
   return (
     <section className="flex flex-col items-center justify-center pt-[15%]">
       <div>
-        <img src={hangman} alt="hangman" className="animate-entrance" />
+        <img
+          src={hangman}
+          alt="hangman"
+          className="w-full animate-opacity-bg"
+        />
         <button
           onClick={handleStarGame}
-          className="hover:glowing mx-auto mt-20 block text-7xl text-white"
+          className="hover:glowing mx-auto mt-20 block text-6xl text-white"
         >
           START
         </button>

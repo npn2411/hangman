@@ -46,7 +46,6 @@
 @layer utilities {
   .glowing {
     text-shadow: 0 0 10px currentColor, 0 0 20px currentColor,
-      0 0 40px currentColor, 0 0 80px currentColor, 0 0 120px currentColor,
-      0 0 160px currentColor;
+      0 0 40px currentColor, 0 0 80px currentColor, 0 0 120px currentColor;
   }
 }

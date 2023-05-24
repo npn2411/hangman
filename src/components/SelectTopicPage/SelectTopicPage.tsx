@@ -53,10 +53,10 @@ export default memo(function SelectTopicPage({
         </div>
       </div>
       <button
-        className="hover:glowing mx-auto mt-4 block rounded-md border-4 px-4 py-2 text-3xl shadow-inner hover:shadow-white"
+        className="hover:glowing mx-auto mt-4 block rounded-xl border-4 px-4 py-2 text-3xl shadow-inner hover:shadow-white"
         onClick={() => setIsSelectingTopic(false)}
       >
-        OK
+        PLAY
       </button>
     </section>
   );

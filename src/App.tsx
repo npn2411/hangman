@@ -115,7 +115,11 @@ const App = () => {
   }, []);
 
   return (
+<<<<<<< HEAD
     <div className="min-h-screen py-5 bg-black">
+=======
+    <div className="relative h-screen w-screen bg-black">
+>>>>>>> 0c585fc (update style)
       {isModalAppear && (
         <Modal
           youWin={youWin}
@@ -136,7 +140,7 @@ const App = () => {
           />
         ) : (
           // ingame screen
-          <>
+          <div className="container">
             <button className="mx-auto block pt-12" onClick={handleChangeTopic}>
               BACK
             </button>
@@ -155,7 +159,7 @@ const App = () => {
               guessedLetters={guessedLetters}
               youLose={youLose}
             />
-          </>
+          </div>
         )
       ) : (
         <HomePage handleStarGame={handleStarGame} />

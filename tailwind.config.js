@@ -10,14 +10,14 @@ module.exports = {
         poppins: ['poppins'],
       },
       keyframes: {
-        entrance: {
+        'opacity-bg': {
           '0%': { opacity: 0, backgroundColor: '#a2a2a2' },
           '50%': { opacity: 0.5 },
           '100%': { opacity: 1, backgroundColor: 'rgba(0,0,0,0.8)' },
         },
       },
       animation: {
-        entrance: 'entrance 1s linear forwards',
+        'opacity-bg': 'opacity-bg 1s linear forwards',
       },
     },
   },

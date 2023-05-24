@@ -22,10 +22,14 @@ export default function HiddenWord({
           return (
             <span
               key={index}
-              className="z-10 grid aspect-square h-[60px] place-items-center border-2 border-white bg-red500"
+              className="z-10 grid aspect-square h-[60px] select-none place-items-center border-2 border-red500"
             >
-              {(guessedLetters?.includes(letter) || youLose) && (
-                <p className="pointer-events-none text-3xl font-semibold uppercase text-white">
+              {(guessedLetters.includes(letter) || youLose) && (
+                <p
+                  className={`pointer-events-none text-3xl font-semibold uppercase text-green500 ${
+                    !guessedLetters.includes(letter) && 'text-red500'
+                  }`}
+                >
                   {letter}
                 </p>
               )}
