@@ -15,9 +15,14 @@ module.exports = {
           '50%': { opacity: 0.5 },
           '100%': { opacity: 1, backgroundColor: 'rgba(0,0,0,0.8)' },
         },
+        white2dark: {
+          '0%': { backgroundColor: '#fff' },
+          '100%': { backgroundColor: '#000' },
+        },
       },
       animation: {
         'opacity-bg': 'opacity-bg 1s linear forwards',
+        'bg-white-to-dark': 'white2dark 2s linear forwards',
       },
     },
   },

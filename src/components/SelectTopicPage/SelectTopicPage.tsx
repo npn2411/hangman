@@ -16,12 +16,12 @@ export default memo(function SelectTopicPage({
 }: Props) {
   return (
     <section className="container">
-      <div className="p-5">
+      <div className="p-10">
         <div className="mx-auto h-[155px] w-[70%] rounded-3xl border-4 border-green500 px-6 py-4 text-center">
           <span className="mx-auto block text-3xl capitalize text-red500">
             {selectedTopic.name || 'Select Topic'}
           </span>
-          <p className="mt-5 line-clamp-2">
+          <p className="mt-5 line-clamp-2 text-black">
             {selectedTopic.words.map((word: string, index: number) => {
               if (index === selectedTopic.words.length - 1) return word;
               return word + ', ';
@@ -31,7 +31,7 @@ export default memo(function SelectTopicPage({
         <div className="mt-10 grid grid-cols-4 gap-10 p-5">
           {topicList.map(({ id, name, img, words }: Topic) => (
             <div
-              className="grid cursor-pointer place-items-center rounded-3xl border-4 border-gray-600 bg-gray-800 p-4 text-center"
+              className="grid cursor-pointer place-items-center rounded-3xl border-4 border-gray-400 bg-gray-600 p-4 text-center"
               onClick={() =>
                 setSelectTopic({
                   id,
@@ -53,7 +53,7 @@ export default memo(function SelectTopicPage({
         </div>
       </div>
       <button
-        className="hover:glowing mx-auto mt-4 block rounded-xl border-4 px-4 py-2 text-3xl shadow-inner hover:shadow-white"
+        className="hover:glowing mx-auto mt-4 block rounded-xl border-4 border-red500 px-4 py-2 text-3xl text-red500 shadow-inner hover:shadow-current"
         onClick={() => setIsSelectingTopic(false)}
       >
         Play

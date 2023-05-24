@@ -29,7 +29,7 @@ export default function Modal({
           {!runOutOfWord && (
             <button
               onClick={handleContinue}
-              className="hover:glowing border-2 border-white px-4 py-2 text-white shadow-inner hover:shadow-current"
+              className="hover:glowing border-4 border-white px-4 py-2 text-white shadow-inner hover:shadow-current"
             >
               Continue
             </button>
