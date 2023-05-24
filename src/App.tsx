@@ -115,7 +115,7 @@ const App = () => {
   }, []);
 
   return (
-    <div className="h-screen w-screen bg-black">
+    <div className="min-h-screen py-5 bg-black">
       {isModalAppear && (
         <Modal
           youWin={youWin}

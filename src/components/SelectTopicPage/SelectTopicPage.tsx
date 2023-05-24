@@ -15,7 +15,7 @@ export default memo(function SelectTopicPage({
   setIsSelectingTopic,
 }: Props) {
   return (
-    <section className="container pt-16">
+    <section className="container">
       <div className="p-5">
         <div className="mx-auto h-[155px] w-[70%] rounded-3xl border-4 border-green500 px-6 py-4 text-center">
           <span className="mx-auto block text-3xl capitalize text-red500">
