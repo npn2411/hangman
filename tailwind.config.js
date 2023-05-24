@@ -9,6 +9,16 @@ module.exports = {
       fontFamily: {
         poppins: ['poppins'],
       },
+      keyframes: {
+        entrance: {
+          '0%': { opacity: 0, backgroundColor: '#a2a2a2' },
+          '50%': { opacity: 0.5 },
+          '100%': { opacity: 1, backgroundColor: 'rgba(0,0,0,0.8)' },
+        },
+      },
+      animation: {
+        entrance: 'entrance 1s linear forwards',
+      },
     },
   },
   plugins: [],
