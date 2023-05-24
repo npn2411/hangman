@@ -17,7 +17,7 @@ export default function HomePage({ handleStarGame }: Props) {
           onClick={handleStarGame}
           className="hover:glowing mx-auto mt-20 block text-6xl text-white"
         >
-          START
+          Start
         </button>
       </div>
     </section>

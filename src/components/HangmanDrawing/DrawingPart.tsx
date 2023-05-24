@@ -44,10 +44,7 @@ const BODY = () => {
   );
 };
 
-const HEAD = (
-  youLose: boolean,
-  setTransitionEnd: React.Dispatch<React.SetStateAction<boolean>>,
-) => {
+const HEAD = (youLose: boolean) => {
   return (
     <div
       className={`absolute left-1/2 top-[100px] aspect-square w-14 ${
@@ -55,7 +52,6 @@ const HEAD = (
           ? 'translate-x-[135px] translate-y-[10px]'
           : 'translate-x-[120px]'
       } rounded-full bg-white transition-all duration-[1250ms]`}
-      onTransitionEnd={() => setTransitionEnd(true)}
     />
   );
 };

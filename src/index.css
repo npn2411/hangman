@@ -10,14 +10,14 @@
     word-spacing: 1px;
   }
   h1 {
-    @apply text-8xl font-extrabold;
+    @apply text-[80px] font-extrabold;
     word-spacing: 20px;
   }
   p {
-    @apply text-xl;
+    @apply text-xl font-medium;
   }
   button {
-    @apply text-2xl;
+    @apply text-2xl font-semibold;
   }
 }
 
