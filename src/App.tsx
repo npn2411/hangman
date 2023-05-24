@@ -91,16 +91,18 @@ const App = () => {
 
   const handleContinue = useCallback(() => {
     const id = selectedTopic.id;
-    const randomNumber = Math.floor(
-      Math.random() * topics[id - 1].words.length,
-    );
-    let word = topics[id - 1].words[randomNumber];
 
-    while (guessedWords.includes(word)) {
-      word = topics[id - 1].words[randomNumber];
+    for (let i = 0; i < Infinity; i++) {
+      const randomNumber = Math.floor(
+        Math.random() * topics[id - 1].words.length,
+      );
+      const word = topics[id - 1].words[randomNumber];
+      if (!guessedWords.includes(word)) {
+        setWordToGuess(word);
+        break;
+      }
     }
 
-    setWordToGuess(word);
     setModalAppear(false);
     setGuessedLetters([]);
   }, [guessedWords, selectedTopic]);
