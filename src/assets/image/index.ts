@@ -9,6 +9,7 @@ import countries from './countries.png';
 import home from './home.png';
 import fruits from './fruits.png';
 import transport from './transport.png';
+import speaker from './speaker.png';
 
 export {
   hangman,
@@ -22,4 +23,5 @@ export {
   home,
   fruits,
   transport,
+  speaker,
 };

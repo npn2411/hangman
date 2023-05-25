@@ -7,6 +7,7 @@ import {
   HiddenWord,
   KeyBoard,
   Modal,
+  Menu,
 } from './components';
 
 export interface Topic {
@@ -35,51 +36,51 @@ const App = () => {
   const incorrectGuessedLetters: string[] = guessedLetters.filter((letter) => {
     if (!wordToGuess.includes(letter)) return letter;
   });
+  const outOfWord: boolean =
+    guessedWords.length === topics[selectedTopic.id - 1]?.words.length;
+  const audio = new SpeechSynthesisUtterance();
 
-  const youLose = incorrectGuessedLetters.length === 10;
-
-  const removedSpaceWord = useMemo(() => {
-    if (!wordToGuess) return '';
-
-    const removedSpaceWord = wordToGuess.split('').filter((letter) => {
+  const makeLettersArrayNoSpace: string[] = useMemo(() => {
+    if (!wordToGuess) return [];
+    const makeLettersArrayNoSpace = wordToGuess.split('').filter((letter) => {
       if (letter !== ' ') return letter;
     });
-    return removedSpaceWord;
+    return makeLettersArrayNoSpace;
   }, [wordToGuess]);
 
+  const youLose = incorrectGuessedLetters.length === 10;
   const youWin =
-    removedSpaceWord !== '' &&
-    removedSpaceWord.every((letter) => {
+    makeLettersArrayNoSpace.length !== 0 &&
+    makeLettersArrayNoSpace.every((letter) => {
       return guessedLetters.includes(letter);
     });
 
-  const runOutOfWord =
-    guessedWords.length === topics[selectedTopic.id - 1]?.words.length;
+  const generateRandomWord = useCallback((id: number): string => {
+    const randomNumber = Math.floor(
+      Math.random() * topics[id - 1].words.length,
+    );
+    const word = topics[id - 1].words[randomNumber];
+    return word;
+  }, []);
 
   useEffect(() => {
     if (selectedTopic.id) {
-      const id = selectedTopic.id;
-      const randomNumber = Math.floor(
-        Math.random() * topics[id - 1].words.length,
-      );
-      const word = topics[id - 1].words[randomNumber];
+      const word = generateRandomWord(selectedTopic.id);
       setWordToGuess(word);
     }
   }, [selectedTopic]);
 
+  // display a modal after user win or lose
   useEffect(() => {
-    if (!youLose && !youWin) return;
-
-    setGuessedWords((preWords) => [...preWords, wordToGuess]);
-
-    const waitTime = (youLose && 2500) || (youWin && 1000) || 0;
-
-    const id = setTimeout(() => {
-      setModalAppear(true);
-    }, waitTime);
-
-    if (youWin) setWonCount(wonCount + 1);
-    return () => clearTimeout(id);
+    if (youLose || youWin) {
+      setGuessedWords((preWords) => [...preWords, wordToGuess]);
+      const waitTime = (youLose && 2500) || (youWin && 1000) || 0;
+      const id = setTimeout(() => {
+        setModalAppear(true);
+      }, waitTime);
+      if (youWin) setWonCount(wonCount + 1);
+      return () => clearTimeout(id);
+    }
   }, [youWin, youLose]);
 
   const handleStarGame = useCallback(() => {
@@ -92,20 +93,19 @@ const App = () => {
     setGuessedLetters((previous) => [...previous, key]);
   }, []);
 
-  const handleContinue = useCallback(() => {
-    const id = selectedTopic.id;
+  const handlePlayAudio = useCallback(() => {
+    audio.text = wordToGuess;
+    window.speechSynthesis.speak(audio);
+  }, [wordToGuess]);
 
+  const handleContinue = useCallback(() => {
     for (let i = 0; i < Infinity; i++) {
-      const randomNumber = Math.floor(
-        Math.random() * topics[id - 1].words.length,
-      );
-      const word = topics[id - 1].words[randomNumber];
+      const word = generateRandomWord(selectedTopic.id);
       if (!guessedWords.includes(word)) {
         setWordToGuess(word);
         break;
       }
     }
-
     setModalAppear(false);
     setGuessedLetters([]);
   }, [guessedWords, selectedTopic]);
@@ -130,13 +130,13 @@ const App = () => {
   }, []);
 
   return (
-    <div className="min-h-screen relative">
+    <div className="relative min-h-screen">
       {isModalAppear && (
         <Modal
           youWin={youWin}
           youLose={youLose}
           handleContinue={handleContinue}
-          runOutOfWord={runOutOfWord}
+          outOfWord={outOfWord}
           handleQuit={handleQuit}
         />
       )}
@@ -151,26 +151,14 @@ const App = () => {
         ) : (
           // ingame screen
           <div className="relative min-h-screen animate-bg-white-to-dark">
-            <div className="absolute left-[10%] right-[10%] top-[5%] flex items-start justify-between">
-              <button
-                className="hover:glowing z-10 block border-2 border-white px-4 py-2 shadow-inner hover:shadow-current"
-                onClick={handleChangeTopic}
-              >
-                Back
-              </button>
-              <div className="z-10 -mr-2">
-                <p>
-                  Topic:
-                  <span className="text-green500"> {selectedTopic.name}</span>
-                </p>
-                <p className="mt-10">
-                  Correct:{' '}
-                  <span className="text-green500">
-                    {wonCount}/{guessedWords.length}
-                  </span>
-                </p>
-              </div>
-            </div>
+            <Menu
+              handleChangeTopic={handleChangeTopic}
+              handlePlayAudio={handlePlayAudio}
+              selectedTopic={selectedTopic}
+              wonCount={wonCount}
+              guessedWords={guessedWords}
+              incorrectGuessedLetters={incorrectGuessedLetters}
+            />
             <HangmanDrawing
               incorrectGuessed={incorrectGuessedLetters}
               youLose={youLose}

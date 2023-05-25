@@ -1,7 +1,7 @@
 interface Props {
   youWin: boolean;
   youLose: boolean;
-  runOutOfWord: boolean;
+  outOfWord: boolean;
   handleContinue: () => void;
   handleQuit: () => void;
 }
@@ -9,7 +9,7 @@ interface Props {
 export default function Modal({
   youWin,
   youLose,
-  runOutOfWord,
+  outOfWord,
   handleContinue,
   handleQuit,
 }: Props) {
@@ -19,7 +19,7 @@ export default function Modal({
         <h1 className="glowing select-none uppercase text-white/70">
           {(youWin && "you're alive") || (youLose && 'game over')}
         </h1>
-        {runOutOfWord && (
+        {outOfWord && (
           <p className="text-center">
             You have went through all the word from this topic, we'll add new
             words soon, please change to other topic. <br />
@@ -27,7 +27,7 @@ export default function Modal({
           </p>
         )}
         <div className="item-center mt-2 flex gap-10 font-semibold">
-          {!runOutOfWord && (
+          {!outOfWord && (
             <button
               onClick={handleContinue}
               className="hover:glowing border-4 border-white px-4 py-2 text-white shadow-inner hover:shadow-current"

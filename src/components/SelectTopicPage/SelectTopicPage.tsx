@@ -16,7 +16,7 @@ export default memo(function SelectTopicPage({
 }: Props) {
   return (
     <section className="container">
-      <div className="mt-10">
+      <div className="pt-10">
         <div className="mx-auto h-[155px] w-[70%] rounded-3xl border-4 border-green500 px-6 py-4 text-center">
           <span className="mx-auto block text-3xl capitalize text-red500">
             {selectedTopic.name || 'Select Topic'}
@@ -53,9 +53,9 @@ export default memo(function SelectTopicPage({
         </div>
       </div>
       <button
-        className={`hover:glowing mx-auto mb-5 block rounded-xl border-4 border-red500 px-4 py-2 text-3xl text-red500 ${selectedTopic.id == 0 && 'cursor-not-allowed'}`}
+        className="mx-auto mb-5 block rounded-xl border-4 border-red500 px-4 py-2 text-3xl text-red500 disabled:opacity-30"
         onClick={() => setIsSelectingTopic(false)}
-        disabled={selectedTopic.id == 0 ? true:false}
+        disabled={selectedTopic.id == 0 ? true : false}
       >
         Play
       </button>

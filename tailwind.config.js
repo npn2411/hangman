@@ -23,6 +23,7 @@ module.exports = {
       animation: {
         'opacity-bg': 'opacity-bg 1s linear forwards',
         'bg-white-to-dark': 'white2dark 1s linear forwards',
+        'fast-pulse': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },
     },
   },
