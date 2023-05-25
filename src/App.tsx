@@ -71,9 +71,12 @@ const App = () => {
     if (!youLose && !youWin) return;
 
     setGuessedWords((preWords) => [...preWords, wordToGuess]);
+
+    const waitTime = (youLose && 2500) || (youWin && 1000) || 0;
+
     const id = setTimeout(() => {
       setModalAppear(true);
-    }, 1000);
+    }, waitTime);
 
     if (youWin) setWonCount(wonCount + 1);
     return () => clearTimeout(id);

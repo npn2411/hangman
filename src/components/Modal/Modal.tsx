@@ -22,10 +22,11 @@ export default function Modal({
         {runOutOfWord && (
           <p className="text-center">
             You have went through all the word from this topic, we'll add new
-            words soon, please change to other topic.
+            words soon, please change to other topic. <br />
+            THANK YOU!
           </p>
         )}
-        <div className="item-center flex gap-10 font-semibold">
+        <div className="item-center mt-2 flex gap-10 font-semibold">
           {!runOutOfWord && (
             <button
               onClick={handleContinue}

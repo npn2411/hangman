@@ -22,7 +22,7 @@ module.exports = {
       },
       animation: {
         'opacity-bg': 'opacity-bg 1s linear forwards',
-        'bg-white-to-dark': 'white2dark 2s linear forwards',
+        'bg-white-to-dark': 'white2dark 1s linear forwards',
       },
     },
   },
