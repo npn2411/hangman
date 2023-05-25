@@ -130,7 +130,7 @@ const App = () => {
   }, []);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen relative">
       {isModalAppear && (
         <Modal
           youWin={youWin}
@@ -150,10 +150,10 @@ const App = () => {
           />
         ) : (
           // ingame screen
-          <div className="relative h-screen animate-bg-white-to-dark">
+          <div className="relative min-h-screen animate-bg-white-to-dark">
             <div className="absolute left-[10%] right-[10%] top-[5%] flex items-start justify-between">
               <button
-                className="hover:glowing z-10 block rounded-xl border-2 border-white px-4 py-2 shadow-inner hover:shadow-current"
+                className="hover:glowing z-10 block border-2 border-white px-4 py-2 shadow-inner hover:shadow-current"
                 onClick={handleChangeTopic}
               >
                 Back
