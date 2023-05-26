@@ -26,7 +26,7 @@ export default function Modal({
             THANK YOU!
           </p>
         )}
-        <div className="item-center mt-2 flex gap-10 font-semibold">
+        <div className="item-center mt-2 flex gap-14 font-semibold">
           {!outOfWord && (
             <button
               onClick={handleContinue}
@@ -39,7 +39,7 @@ export default function Modal({
             onClick={handleQuit}
             className="hover:glowing border-4 border-white px-4 py-2 text-white shadow-inner hover:shadow-current"
           >
-            Quit
+            Quit Game
           </button>
         </div>
       </div>

@@ -4,8 +4,8 @@ import { Topic } from '@/App';
 interface Props {
   topicList: Topic[];
   selectedTopic: Topic;
-  setSelectTopic: React.Dispatch<React.SetStateAction<Topic>>;
-  setIsSelectingTopic: React.Dispatch<React.SetStateAction<boolean>>;
+  setSelectTopic(val: Topic): void;
+  setIsSelectingTopic(val: boolean): void;
 }
 
 export default memo(function SelectTopicPage({

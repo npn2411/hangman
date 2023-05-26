@@ -74,7 +74,7 @@ export default function HangmanDrawing({ incorrectGuessed, youLose }: Props) {
             incorrectGuessed.length >= 8 ? 'opacity-100' : 'opacity-0'
           } absolute left-1/2 top-[260px] h-[90px] w-[20px] origin-top-right translate-x-[120px] ${
             youLose ? 'rotate-0' : 'rotate-[30deg]'
-          } rounded-b-xl bg-white transition-all duration-500 hover:rotate-0`}
+          } rounded-b-xl bg-white transition-all duration-500`}
         />
 
         {/* right leg */}
