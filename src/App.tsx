@@ -55,13 +55,16 @@ const App = () => {
       return guessedLetters.includes(letter);
     });
 
-  const generateRandomWord = useCallback((id: number): string => {
-    const randomNumber = Math.floor(
-      Math.random() * topics[id - 1].words.length,
-    );
-    const word = topics[id - 1].words[randomNumber];
-    return word;
-  }, []);
+  const generateRandomWord: (id: number) => string = useCallback(
+    (id: number) => {
+      const randomNumber = Math.floor(
+        Math.random() * topics[id - 1].words.length,
+      );
+      const word = topics[id - 1].words[randomNumber];
+      return word;
+    },
+    [],
+  );
 
   useEffect(() => {
     if (selectedTopic.id) {
@@ -74,7 +77,7 @@ const App = () => {
   useEffect(() => {
     if (youLose || youWin) {
       setGuessedWords((preWords) => [...preWords, wordToGuess]);
-      const waitTime = (youLose && 2500) || (youWin && 1000) || 0;
+      const waitTime = (youLose && 2500) || (youWin && 1000) || 2500;
       const id = setTimeout(() => {
         setModalAppear(true);
       }, waitTime);
@@ -83,22 +86,22 @@ const App = () => {
     }
   }, [youWin, youLose]);
 
-  const handleStarGame = useCallback(() => {
+  const handleStarGame = useCallback((): void => {
     setStartGame(true);
     setIsSelectingTopic(true);
   }, []);
 
-  const handleClickKey = useCallback((key: string) => {
+  const handleClickKey = useCallback((key: string): void => {
     if (guessedLetters.includes(key)) return;
     setGuessedLetters((previous) => [...previous, key]);
   }, []);
 
-  const handlePlayAudio = useCallback(() => {
+  const handlePlayAudio = useCallback((): void => {
     audio.text = wordToGuess;
     window.speechSynthesis.speak(audio);
   }, [wordToGuess]);
 
-  const handleContinue = useCallback(() => {
+  const handleContinue = useCallback((): void => {
     for (let i = 0; i < Infinity; i++) {
       const word = generateRandomWord(selectedTopic.id);
       if (!guessedWords.includes(word)) {
@@ -110,7 +113,7 @@ const App = () => {
     setGuessedLetters([]);
   }, [guessedWords, selectedTopic]);
 
-  const handleChangeTopic = useCallback(() => {
+  const handleChangeTopic = useCallback((): void => {
     setModalAppear(false);
     setSelectTopic(INITIAL_TOPIC);
     setGuessedLetters([]);
@@ -119,7 +122,7 @@ const App = () => {
     setIsSelectingTopic(true);
   }, []);
 
-  const handleQuit = useCallback(() => {
+  const handleQuit = useCallback((): void => {
     setModalAppear(false);
     setSelectTopic(INITIAL_TOPIC);
     setGuessedLetters([]);
