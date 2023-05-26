@@ -1,5 +1,3 @@
-// import HANGMAN_DRAWING_PART from './DrawingPart';
-
 interface Props {
   incorrectGuessed: string[];
   youLose: boolean;
@@ -98,12 +96,6 @@ export default function HangmanDrawing({ incorrectGuessed, youLose }: Props) {
             } absolute bottom-0 left-0 h-3 -translate-x-3 rounded-l-full rounded-r-full bg-white transition-all duration-500`}
           ></div>
         </div>
-
-        {/* OLD VER - NOT HAVING ANIMATION */}
-        {/* {incorrectGuessed.map((_letter, index: number) => {
-        const Element = HANGMAN_DRAWING_PART[index];
-        return <span key={index}>{Element(youLose)}</span>;
-      })} */}
       </div>
     </section>
   );
