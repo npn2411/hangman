@@ -112,21 +112,21 @@ const App = () => {
 
   const handleChangeTopic = useCallback(() => {
     setModalAppear(false);
-    setIsSelectingTopic(true);
     setSelectTopic(INITIAL_TOPIC);
     setGuessedLetters([]);
     setGuessedWords([]);
     setWonCount(0);
+    setIsSelectingTopic(true);
   }, []);
 
   const handleQuit = useCallback(() => {
     setModalAppear(false);
-    setStartGame(false);
-    setIsSelectingTopic(false);
     setSelectTopic(INITIAL_TOPIC);
-    setGuessedWords([]);
     setGuessedLetters([]);
+    setGuessedWords([]);
     setWonCount(0);
+    setIsSelectingTopic(false);
+    setStartGame(false);
   }, []);
 
   return (
