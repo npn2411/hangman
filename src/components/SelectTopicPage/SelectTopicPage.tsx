@@ -4,19 +4,19 @@ import { Topic } from '@/App';
 interface Props {
   topicList: Topic[];
   selectedTopic: Topic;
-  setSelectTopic(val: Topic): void;
+  setSelectedTopic(val: Topic): void;
   setIsSelectingTopic(val: boolean): void;
 }
 
 export default memo(function SelectTopicPage({
   topicList,
   selectedTopic,
-  setSelectTopic,
+  setSelectedTopic,
   setIsSelectingTopic,
 }: Props) {
   return (
     <section className="container">
-      <div className="pt-10">
+      <div className="pt-5">
         <div className="mx-auto h-[155px] w-[70%] rounded-3xl border-4 border-green500 px-6 py-4 text-center">
           <span className="mx-auto block text-3xl capitalize text-red500">
             {selectedTopic.name || 'Select Topic'}
@@ -28,12 +28,12 @@ export default memo(function SelectTopicPage({
             })}
           </p>
         </div>
-        <div className="grid grid-cols-4 gap-10 p-10">
+        <div className="grid grid-cols-4 gap-8 px-10 py-6">
           {topicList.map(({ id, name, img, words }: Topic) => (
             <div
               className="grid cursor-pointer place-items-center rounded-3xl border-4 border-gray-400 bg-gray-600 p-4 text-center"
               onClick={() =>
-                setSelectTopic({
+                setSelectedTopic({
                   id,
                   name,
                   words,

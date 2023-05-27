@@ -18,20 +18,20 @@ export interface Topic {
 }
 
 const App = () => {
-  const INITIAL_TOPIC: Topic = {
+  const INIT_TOPIC: Topic = {
     id: 0,
     name: '',
     words: [],
   };
 
-  const [gameStarted, setStartGame] = useState(false);
+  const [gameStart, setGameStart] = useState(false);
   const [isSelectingTopic, setIsSelectingTopic] = useState(false);
-  const [selectedTopic, setSelectTopic] = useState<Topic>(INITIAL_TOPIC);
+  const [selectedTopic, setSelectedTopic] = useState<Topic>(INIT_TOPIC);
   const [wordToGuess, setWordToGuess] = useState('');
   const [guessedWords, setGuessedWords] = useState<string[]>([]);
   const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
   const [wonCount, setWonCount] = useState(0);
-  const [isModalAppear, setModalAppear] = useState(false);
+  const [modalShow, setModalShow] = useState(false);
 
   const incorrectGuessedLetters: string[] = guessedLetters.filter((letter) => {
     if (!wordToGuess.includes(letter)) return letter;
@@ -40,18 +40,18 @@ const App = () => {
     guessedWords.length === topics[selectedTopic.id - 1]?.words.length;
   const audio = new SpeechSynthesisUtterance();
 
-  const makeLettersArrayNoSpace: string[] = useMemo(() => {
+  const arrayLettersNoSpace: string[] = useMemo(() => {
     if (!wordToGuess) return [];
-    const makeLettersArrayNoSpace = wordToGuess.split('').filter((letter) => {
+    const arrayLettersNoSpace = wordToGuess.split('').filter((letter) => {
       if (letter !== ' ') return letter;
     });
-    return makeLettersArrayNoSpace;
+    return arrayLettersNoSpace;
   }, [wordToGuess]);
 
   const youLose = incorrectGuessedLetters.length === 10;
   const youWin =
-    makeLettersArrayNoSpace.length !== 0 &&
-    makeLettersArrayNoSpace.every((letter) => {
+    arrayLettersNoSpace.length !== 0 &&
+    arrayLettersNoSpace.every((letter) => {
       return guessedLetters.includes(letter);
     });
 
@@ -73,13 +73,13 @@ const App = () => {
     }
   }, [selectedTopic]);
 
-  // display a modal after user win or lose
+  // show modal when user win or lose
   useEffect(() => {
     if (youLose || youWin) {
       setGuessedWords((preWords) => [...preWords, wordToGuess]);
       const waitTime = (youLose && 2500) || (youWin && 1000) || 2500;
       const id = setTimeout(() => {
-        setModalAppear(true);
+        setModalShow(true);
       }, waitTime);
       if (youWin) setWonCount(wonCount + 1);
       return () => clearTimeout(id);
@@ -87,7 +87,7 @@ const App = () => {
   }, [youWin, youLose]);
 
   const handleStarGame = useCallback((): void => {
-    setStartGame(true);
+    setGameStart(true);
     setIsSelectingTopic(true);
   }, []);
 
@@ -109,13 +109,13 @@ const App = () => {
         break;
       }
     }
-    setModalAppear(false);
+    setModalShow(false);
     setGuessedLetters([]);
   }, [guessedWords, selectedTopic]);
 
   const handleChangeTopic = useCallback((): void => {
-    setModalAppear(false);
-    setSelectTopic(INITIAL_TOPIC);
+    setModalShow(false);
+    setSelectedTopic(INIT_TOPIC);
     setGuessedLetters([]);
     setGuessedWords([]);
     setWonCount(0);
@@ -123,18 +123,18 @@ const App = () => {
   }, []);
 
   const handleQuit = useCallback((): void => {
-    setModalAppear(false);
-    setSelectTopic(INITIAL_TOPIC);
+    setModalShow(false);
+    setSelectedTopic(INIT_TOPIC);
     setGuessedLetters([]);
     setGuessedWords([]);
     setWonCount(0);
     setIsSelectingTopic(false);
-    setStartGame(false);
+    setGameStart(false);
   }, []);
 
   return (
     <div className="relative min-h-screen">
-      {isModalAppear && (
+      {modalShow && (
         <Modal
           youWin={youWin}
           youLose={youLose}
@@ -143,11 +143,11 @@ const App = () => {
           handleQuit={handleQuit}
         />
       )}
-      {gameStarted ? (
+      {gameStart ? (
         isSelectingTopic ? (
           <SelectTopicPage
             selectedTopic={selectedTopic}
-            setSelectTopic={setSelectTopic}
+            setSelectedTopic={setSelectedTopic}
             topicList={topics}
             setIsSelectingTopic={setIsSelectingTopic}
           />
