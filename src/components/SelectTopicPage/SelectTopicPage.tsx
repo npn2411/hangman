@@ -28,7 +28,7 @@ export default memo(function SelectTopicPage({
             })}
           </p>
         </div>
-        <div className="grid grid-cols-4 gap-8 px-10 py-6">
+        <div className="grid grid-cols-4 gap-8 p-10">
           {topicList.map(({ id, name, img, words }: Topic) => (
             <div
               className="grid cursor-pointer place-items-center rounded-3xl border-4 border-gray-400 bg-gray-600 p-4 text-center"

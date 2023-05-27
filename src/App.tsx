@@ -9,6 +9,7 @@ import {
   Modal,
   Menu,
 } from './components';
+import { correct_sound, heartbeat, heartbeat_flatline } from './assets/audios';
 
 export interface Topic {
   id: number;
@@ -36,9 +37,10 @@ const App = () => {
   const incorrectGuessedLetters: string[] = guessedLetters.filter((letter) => {
     if (!wordToGuess.includes(letter)) return letter;
   });
-  const outOfWord: boolean =
-    guessedWords.length === topics[selectedTopic.id - 1]?.words.length;
-  const audio = new SpeechSynthesisUtterance();
+
+  const outOfWord: boolean = useMemo(() => {
+    return guessedWords.length === topics[selectedTopic.id - 1]?.words.length;
+  }, [guessedWords]);
 
   const arrayLettersNoSpace: string[] = useMemo(() => {
     if (!wordToGuess) return [];
@@ -82,26 +84,38 @@ const App = () => {
         setModalShow(true);
       }, waitTime);
       if (youWin) setWonCount(wonCount + 1);
+      else {
+        const heartbearFlatline = new Audio(heartbeat_flatline);
+        heartbearFlatline.volume = 0.05;
+        heartbearFlatline.play();
+      }
       return () => clearTimeout(id);
     }
   }, [youWin, youLose]);
 
-  const handleStarGame = useCallback((): void => {
+  const handleStarGame = useCallback(() => {
     setGameStart(true);
     setIsSelectingTopic(true);
   }, []);
 
-  const handleClickKey = useCallback((key: string): void => {
-    if (guessedLetters.includes(key)) return;
-    setGuessedLetters((previous) => [...previous, key]);
-  }, []);
+  const handleClickKey = useCallback(
+    (key: string) => {
+      if (wordToGuess.includes(key)) {
+        const audio = new Audio(correct_sound);
+        audio.play();
+      }
+      setGuessedLetters((previous) => [...previous, key]);
+    },
+    [guessedLetters],
+  );
 
-  const handlePlayAudio = useCallback((): void => {
+  const handlePlayAudio = useCallback(() => {
+    const audio = new SpeechSynthesisUtterance();
     audio.text = wordToGuess;
     window.speechSynthesis.speak(audio);
   }, [wordToGuess]);
 
-  const handleContinue = useCallback((): void => {
+  const handleContinue = useCallback(() => {
     for (let i = 0; i < Infinity; i++) {
       const word = generateRandomWord(selectedTopic.id);
       if (!guessedWords.includes(word)) {
@@ -113,7 +127,7 @@ const App = () => {
     setGuessedLetters([]);
   }, [guessedWords, selectedTopic]);
 
-  const handleChangeTopic = useCallback((): void => {
+  const handleChangeTopic = useCallback(() => {
     setModalShow(false);
     setSelectedTopic(INIT_TOPIC);
     setGuessedLetters([]);
@@ -122,7 +136,7 @@ const App = () => {
     setIsSelectingTopic(true);
   }, []);
 
-  const handleQuit = useCallback((): void => {
+  const handleQuit = useCallback(() => {
     setModalShow(false);
     setSelectedTopic(INIT_TOPIC);
     setGuessedLetters([]);
@@ -134,15 +148,6 @@ const App = () => {
 
   return (
     <div className="relative min-h-screen">
-      {modalShow && (
-        <Modal
-          youWin={youWin}
-          youLose={youLose}
-          handleContinue={handleContinue}
-          outOfWord={outOfWord}
-          handleQuit={handleQuit}
-        />
-      )}
       {gameStart ? (
         isSelectingTopic ? (
           <SelectTopicPage
@@ -154,16 +159,24 @@ const App = () => {
         ) : (
           // ingame screen
           <div className="relative min-h-screen animate-bg-white-to-dark">
+            {incorrectGuessedLetters.length > 4 && (
+              <audio
+                src={heartbeat}
+                autoPlay
+                loop
+                muted={youLose ? true : false}
+              />
+            )}
             <Menu
               handleChangeTopic={handleChangeTopic}
               handlePlayAudio={handlePlayAudio}
-              selectedTopic={selectedTopic}
+              selectedTopicName={selectedTopic.name}
               wonCount={wonCount}
               guessedWords={guessedWords}
-              incorrectGuessedLetters={incorrectGuessedLetters}
+              incorrectGuessed={incorrectGuessedLetters.length}
             />
             <HangmanDrawing
-              incorrectGuessed={incorrectGuessedLetters}
+              incorrectGuessed={incorrectGuessedLetters.length}
               youLose={youLose}
             />
             <HiddenWord
@@ -181,6 +194,15 @@ const App = () => {
         )
       ) : (
         <HomePage handleStarGame={handleStarGame} />
+      )}
+      {modalShow && (
+        <Modal
+          youWin={youWin}
+          youLose={youLose}
+          handleContinue={handleContinue}
+          outOfWord={outOfWord}
+          handleQuit={handleQuit}
+        />
       )}
     </div>
   );
