@@ -19,11 +19,17 @@ module.exports = {
           '0%': { backgroundColor: '#fff' },
           '100%': { backgroundColor: '#000' },
         },
+        spring: {
+          '0%, 100%': { transform: 'translateY(0)', rotate: '0deg' },
+          '25%': { transform: 'translateY(-30%)', rotate: '30deg' },
+          '50%': { transform: 'translateY(-30%)', rotate: '-30deg' },
+        },
       },
       animation: {
         'opacity-bg': 'opacity-bg 1s linear forwards',
         'bg-white-to-dark': 'white2dark 1s linear forwards',
         'fast-pulse': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        spring: 'spring .25s linear',
       },
     },
   },

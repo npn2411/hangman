@@ -22,7 +22,9 @@ export default function HiddenWord({
           return (
             <span
               key={index}
-              className="z-20 grid aspect-square h-[60px] select-none place-items-center border-2 border-red500"
+              className={`z-20 grid aspect-square h-[60px] select-none place-items-center border-2 border-red500 ${
+                guessedLetters.includes(letter) ? 'animate-spring' : ''
+              }`}
             >
               {(guessedLetters.includes(letter) || youLose) && (
                 <p
