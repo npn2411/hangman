@@ -278,12 +278,9 @@ export const topics = [
       'car',
       'roadster',
       'fire engine',
-      // // test
-      // 'x y',
       // 'a b c',
       // 'abcd',
       // 'abcde',
-      // 'abcdef',
     ],
   },
 ];

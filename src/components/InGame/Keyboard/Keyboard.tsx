@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import KEYS from './keys';
 
 interface Props {
@@ -7,7 +8,7 @@ interface Props {
   youWin: boolean;
 }
 
-export default function KeyBoard({
+export default memo(function KeyBoard({
   handleClickKey,
   guessedLetters,
   youLose,
@@ -17,6 +18,7 @@ export default function KeyBoard({
     <section className="container mt-12 grid max-w-[700px] grid-rows-3 gap-[12px] p-2">
       {KEYS.map((keyArray: string[], index: number) => (
         <div
+          key={index}
           className={`flex items-center ${
             index === 0
               ? 'justify-between'
@@ -45,4 +47,4 @@ export default function KeyBoard({
       ))}
     </section>
   );
-}
+});

@@ -1,3 +1,4 @@
+import { heartbeat } from '../../../assets/audios';
 interface Props {
   incorrectGuessed: number;
   youLose: boolean;
@@ -6,6 +7,10 @@ interface Props {
 export default function HangmanDrawing({ incorrectGuessed, youLose }: Props) {
   return (
     <section className="container pt-16">
+      {incorrectGuessed > 4 && (
+        <audio src={heartbeat} autoPlay loop muted={youLose ? true : false} />
+      )}
+
       <div
         className={`relative grid h-[400px] place-items-center transition-opacity duration-0 ${
           incorrectGuessed > 0 ? 'opacity-100' : 'opacity-0'
@@ -43,10 +48,26 @@ export default function HangmanDrawing({ incorrectGuessed, youLose }: Props) {
 
         {/* body */}
         <div
-          className={`absolute left-1/2 top-[165px] h-[100px] w-[50px] translate-x-[120px] rounded-t-xl bg-white transition-all duration-500 ${
+          className={`absolute left-1/2 top-[165px] z-10 h-[100px] w-[50px] translate-x-[120px] rounded-t-xl bg-white transition-all duration-500 ${
             incorrectGuessed >= 5 ? 'opacity-100' : 'opacity-0'
           }`}
-        />
+        >
+          <span
+            className={`float-right mr-2 mt-2 ${
+              youLose && 'animation-paused'
+            } animate-scale`}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              style={{ fill: '#ef4444' }}
+            >
+              <path d="M20.205 4.791a5.938 5.938 0 0 0-4.209-1.754A5.906 5.906 0 0 0 12 4.595a5.904 5.904 0 0 0-3.996-1.558 5.942 5.942 0 0 0-4.213 1.758c-2.353 2.363-2.352 6.059.002 8.412L12 21.414l8.207-8.207c2.354-2.353 2.355-6.049-.002-8.416z"></path>
+            </svg>
+          </span>
+        </div>
 
         {/* left arm */}
         <div
