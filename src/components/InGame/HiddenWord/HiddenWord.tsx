@@ -11,7 +11,7 @@ export default function HiddenWord({
 }: Props) {
   return (
     <section className="container mt-12">
-      <div className="item-center flex justify-center gap-5">
+      <div className="item-center flex justify-center gap-5 uppercase">
         {wordToGuess.split('').map((letter: string, index: number) => {
           if (letter === ' ')
             return (

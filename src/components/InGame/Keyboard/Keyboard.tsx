@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import KEYS from './keys';
 
 interface Props {
@@ -8,7 +7,7 @@ interface Props {
   youWin: boolean;
 }
 
-export default memo(function KeyBoard({
+export default function KeyBoard({
   handleClickKey,
   guessedLetters,
   youLose,
@@ -47,4 +46,4 @@ export default memo(function KeyBoard({
       ))}
     </section>
   );
-});
+}

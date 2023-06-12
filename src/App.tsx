@@ -35,12 +35,9 @@ const App = () => {
   const incorrectGuessedLetters: string[] = guessedLetters.filter((letter) => {
     if (!wordToGuess.includes(letter)) return letter;
   });
-
-  const outOfWord: boolean =
-    guessedWords.length === topics[selectedTopic.id - 1]?.words.length;
+  const showHint = incorrectGuessedLetters.length < 6 ? false : true;
 
   const removeSpaceFromWord = (): string[] => {
-    if (!wordToGuess) return [];
     const arrayLettersNoSpace = wordToGuess.split('').filter((letter) => {
       if (letter !== ' ') return letter;
     });
@@ -53,6 +50,9 @@ const App = () => {
     removeSpaceFromWord().every((letter) => {
       return guessedLetters.includes(letter);
     });
+
+  const outOfWord: boolean =
+    guessedWords.length === topics[selectedTopic.id - 1]?.words.length;
 
   const generateRandomWord: (id: number) => string = (id: number) => {
     const randomNumber = Math.floor(
@@ -92,16 +92,13 @@ const App = () => {
     setIsSelectingTopic(true);
   };
 
-  const handleClickKey = useCallback(
-    (key: string) => {
-      if (wordToGuess.includes(key)) {
-        const audio = new Audio(correct_sound);
-        audio.play();
-      }
-      setGuessedLetters((previous) => [...previous, key]);
-    },
-    [guessedLetters],
-  );
+  const handleClickKey = (key: string) => {
+    if (wordToGuess.includes(key)) {
+      const audio = new Audio(correct_sound);
+      audio.play();
+    }
+    setGuessedLetters((previous) => [...previous, key]);
+  };
 
   const handlePlayAudio = useCallback(() => {
     const audio = new SpeechSynthesisUtterance();
@@ -109,7 +106,16 @@ const App = () => {
     window.speechSynthesis.speak(audio);
   }, [wordToGuess]);
 
-  const handleContinue = useCallback(() => {
+  const handleChangeTopic = useCallback(() => {
+    setModalShow(false);
+    setSelectedTopic(INIT_TOPIC);
+    setGuessedLetters([]);
+    setGuessedWords([]);
+    setWonCount(0);
+    setIsSelectingTopic(true);
+  }, []);
+
+  const handleContinue = () => {
     for (let i = 0; i < Infinity; i++) {
       const word = generateRandomWord(selectedTopic.id);
       if (!guessedWords.includes(word)) {
@@ -119,15 +125,6 @@ const App = () => {
     }
     setModalShow(false);
     setGuessedLetters([]);
-  }, [guessedWords, selectedTopic]);
-
-  const handleChangeTopic = () => {
-    setModalShow(false);
-    setSelectedTopic(INIT_TOPIC);
-    setGuessedLetters([]);
-    setGuessedWords([]);
-    setWonCount(0);
-    setIsSelectingTopic(true);
   };
 
   const handleQuit = () => {
@@ -159,8 +156,8 @@ const App = () => {
               handlePlayAudio={handlePlayAudio}
               selectedTopicName={selectedTopic.name}
               wonCount={wonCount}
-              guessedWords={guessedWords}
-              incorrectGuessed={incorrectGuessedLetters.length}
+              guessedWords={guessedWords.length}
+              showHint={showHint}
             />
             <HangmanDrawing
               incorrectGuessed={incorrectGuessedLetters.length}
@@ -185,8 +182,8 @@ const App = () => {
         <Modal
           youWin={youWin}
           youLose={youLose}
-          handleContinue={handleContinue}
           outOfWord={outOfWord}
+          handleContinue={handleContinue}
           handleQuit={handleQuit}
         />
       )}

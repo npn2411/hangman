@@ -6,7 +6,7 @@ interface Props {
   handleQuit: () => void;
 }
 
-export default function Modal({
+export default (function Modal({
   youWin,
   youLose,
   outOfWord,
@@ -45,4 +45,4 @@ export default function Modal({
       </div>
     </div>
   );
-}
+});

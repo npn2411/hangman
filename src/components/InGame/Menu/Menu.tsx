@@ -6,8 +6,8 @@ interface Props {
   handlePlayAudio: () => void;
   selectedTopicName: string;
   wonCount: number;
-  guessedWords: string[];
-  incorrectGuessed: number;
+  guessedWords: number;
+  showHint: boolean;
 }
 
 export default memo(function Menu({
@@ -16,7 +16,7 @@ export default memo(function Menu({
   selectedTopicName,
   wonCount,
   guessedWords,
-  incorrectGuessed,
+  showHint,
 }: Props) {
   return (
     <div className="absolute left-[10%] right-[10%] top-[5%] flex items-start justify-between">
@@ -37,7 +37,7 @@ export default memo(function Menu({
           <p className="min-w-[146px]">
             Correct:{' '}
             <span className="text-green500">
-              {wonCount}/{guessedWords.length}
+              {wonCount}/{guessedWords}
             </span>
           </p>
         </div>
@@ -45,9 +45,9 @@ export default memo(function Menu({
           <p>Hint:</p>
           <button
             className={`aspect-square w-10 disabled:opacity-30 ${
-              incorrectGuessed < 6 ? '' : 'animate-fast-pulse'
+              !showHint ? '' : 'animate-fast-pulse'
             }`}
-            disabled={incorrectGuessed < 6 ? true : false}
+            disabled={!showHint ? true : false}
             onClick={handlePlayAudio}
           >
             <img src={speaker} alt={speaker} />
