@@ -1,4 +1,4 @@
-import { heartbeat } from '../../../assets/audios';
+import { heartbeat } from '../../assets/audios';
 interface Props {
   incorrectGuessed: number;
   youLose: boolean;

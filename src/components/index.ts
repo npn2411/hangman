@@ -1,3 +1,2 @@
-export { default as HomePage } from './HomePage/HomePage';
-export { default as SelectTopicPage } from './SelectTopicPage/SelectTopicPage';
-export { default as InGame } from './InGame/InGame';
+export { default as HomeScreen } from './HomeScreen';
+export { default as SelectTopicScreen } from './SelectTopicScreen';

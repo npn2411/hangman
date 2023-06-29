@@ -1,10 +1,10 @@
-import { hangman, hangman_left, hangman_right } from '../../assets/image/';
+import { hangman, hangman_left, hangman_right } from '../assets/image';
 
 interface Props {
   handleStarGame: () => void;
 }
 
-export default function HomePage({ handleStarGame }: Props) {
+export default function HomeScreen({ handleStarGame }: Props) {
   return (
     <section className="h-screen overflow-hidden bg-white pt-[10%]">
       <div className="container">

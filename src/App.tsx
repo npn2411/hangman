@@ -1,13 +1,14 @@
 import { useState, useCallback, useEffect } from 'react';
 import topics from './data_topics';
-import { HomePage, SelectTopicPage, InGame } from './components';
+import { HomeScreen, SelectTopicScreen } from './components';
 import {
+  InGameScreen,
   HangmanDrawing,
   HiddenWord,
   KeyBoard,
   Modal,
   Menu,
-} from './components/InGame';
+} from './components/InGameScreen';
 import { correct_sound, heartbeat_flatline } from './assets/audios';
 export interface Topic {
   id: number;
@@ -24,8 +25,8 @@ const App = () => {
   };
 
   const [gameStart, setGameStart] = useState(false);
-  const [isSelectingTopic, setIsSelectingTopic] = useState(false);
-  const [selectedTopic, setSelectedTopic] = useState<Topic>(INIT_TOPIC);
+  const [selectTopicScreen, setSelectTopicScreen] = useState(false);
+  const [topic, setTopic] = useState<Topic>(INIT_TOPIC);
   const [wordToGuess, setWordToGuess] = useState('');
   const [guessedWords, setGuessedWords] = useState<string[]>([]);
   const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
@@ -52,7 +53,7 @@ const App = () => {
     });
 
   const outOfWord: boolean =
-    guessedWords.length === topics[selectedTopic.id - 1]?.words.length;
+    guessedWords.length === topics[topic.id - 1]?.words.length;
 
   const generateRandomWord: (id: number) => string = (id: number) => {
     const randomNumber = Math.floor(
@@ -63,11 +64,11 @@ const App = () => {
   };
 
   useEffect(() => {
-    if (selectedTopic.id) {
-      const word = generateRandomWord(selectedTopic.id);
+    if (topic.id) {
+      const word = generateRandomWord(topic.id);
       setWordToGuess(word);
     }
-  }, [selectedTopic]);
+  }, [topic]);
 
   // show modal when user win or lose
   useEffect(() => {
@@ -89,7 +90,7 @@ const App = () => {
 
   const handleStarGame = () => {
     setGameStart(true);
-    setIsSelectingTopic(true);
+    setSelectTopicScreen(true);
   };
 
   const handleClickKey = (key: string) => {
@@ -108,16 +109,16 @@ const App = () => {
 
   const handleChangeTopic = useCallback(() => {
     setModalShow(false);
-    setSelectedTopic(INIT_TOPIC);
+    setTopic(INIT_TOPIC);
     setGuessedLetters([]);
     setGuessedWords([]);
     setWonCount(0);
-    setIsSelectingTopic(true);
+    setSelectTopicScreen(true);
   }, []);
 
   const handleContinue = () => {
     for (let i = 0; i < Infinity; i++) {
-      const word = generateRandomWord(selectedTopic.id);
+      const word = generateRandomWord(topic.id);
       if (!guessedWords.includes(word)) {
         setWordToGuess(word);
         break;
@@ -129,32 +130,32 @@ const App = () => {
 
   const handleQuit = () => {
     setModalShow(false);
-    setSelectedTopic(INIT_TOPIC);
+    setTopic(INIT_TOPIC);
     setGuessedLetters([]);
     setGuessedWords([]);
     setWonCount(0);
-    setIsSelectingTopic(false);
+    setSelectTopicScreen(false);
     setGameStart(false);
   };
 
   return (
     <div className="relative min-h-screen">
       {!gameStart ? (
-        <HomePage handleStarGame={handleStarGame} />
-      ) : isSelectingTopic ? (
-        <SelectTopicPage
-          selectedTopic={selectedTopic}
-          setSelectedTopic={setSelectedTopic}
+        <HomeScreen handleStarGame={handleStarGame} />
+      ) : selectTopicScreen ? (
+        <SelectTopicScreen
+          topic={topic}
+          setTopic={setTopic}
           topicList={topics}
-          setIsSelectingTopic={setIsSelectingTopic}
+          setSelectTopicScreen={setSelectTopicScreen}
         />
       ) : (
-        <InGame>
+        <InGameScreen>
           <>
             <Menu
               handleChangeTopic={handleChangeTopic}
               handlePlayAudio={handlePlayAudio}
-              selectedTopicName={selectedTopic.name}
+              selectedTopicName={topic.name}
               wonCount={wonCount}
               guessedWords={guessedWords.length}
               showHint={showHint}
@@ -175,7 +176,7 @@ const App = () => {
               youWin={youWin}
             />
           </>
-        </InGame>
+        </InGameScreen>
       )}
       {/* show modal when user win or lose */}
       {modalShow && (
