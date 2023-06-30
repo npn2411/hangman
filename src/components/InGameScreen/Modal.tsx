@@ -21,8 +21,8 @@ export default (function Modal({
         </h1>
         {outOfWord && (
           <p className="text-center">
-            You have went through all the words from this topic, we'll add new
-            words soon, please change to other topic. <br />
+            You have went through all the words from this topic, we&apos;ll add
+            new words soon, please change to other topic. <br />
             THANK YOU!!
           </p>
         )}

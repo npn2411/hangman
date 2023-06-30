@@ -253,7 +253,7 @@ export const topics = [
   },
   {
     id: 8,
-    name: 'transport',
+    name: 'transportation',
     img: transport,
     words: [
       'bus',
@@ -276,6 +276,7 @@ export const topics = [
       'yacht',
       'cyclo',
       'car',
+      'subway',
       'roadster',
       'fire engine',
       // 'a b c',

@@ -1,15 +1,13 @@
-import { memo } from 'react';
 import { Topic } from '@/App';
+import topics from '../data/topics';
 
 interface Props {
-  topicList: Topic[];
   topic: Topic;
   setTopic(val: Topic): void;
   setSelectTopicScreen(val: boolean): void;
 }
 
-export default memo(function SelectTopicScreen({
-  topicList,
+export default function SelectTopicScreen({
   topic,
   setTopic,
   setSelectTopicScreen,
@@ -29,7 +27,7 @@ export default memo(function SelectTopicScreen({
           </p>
         </div>
         <div className="grid grid-cols-4 gap-8 p-10">
-          {topicList.map(({ id, name, img, words }: Topic) => (
+          {topics.map(({ id, name, img, words }: Topic) => (
             <div
               className="grid cursor-pointer place-items-center rounded-3xl border-4 border-gray-400 bg-gray-600 p-4 text-center"
               onClick={() =>
@@ -61,4 +59,4 @@ export default memo(function SelectTopicScreen({
       </button>
     </section>
   );
-});
+}
