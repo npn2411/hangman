@@ -13,7 +13,7 @@ const App = () => {
   const INIT_TOPIC: Topic = {
     id: 0,
     name: '',
-    words: [],
+    words: []
   };
 
   const [gameStart, setGameStart] = useState(false);

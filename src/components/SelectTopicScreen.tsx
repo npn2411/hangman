@@ -1,5 +1,6 @@
 import { Topic } from '@/App';
 import topics from '../data/topics';
+import { Button } from '.';
 
 interface Props {
   topic: Topic;
@@ -10,7 +11,7 @@ interface Props {
 export default function SelectTopicScreen({
   topic,
   setTopic,
-  setSelectTopicScreen,
+  setSelectTopicScreen
 }: Props) {
   return (
     <section className="container">
@@ -34,11 +35,11 @@ export default function SelectTopicScreen({
                 setTopic({
                   id,
                   name,
-                  words,
+                  words
                 })
               }
               style={{
-                borderColor: topic.id === id ? '#22c55e' : '',
+                borderColor: topic.id === id ? '#22c55e' : ''
               }}
               key={name}
             >
@@ -50,13 +51,14 @@ export default function SelectTopicScreen({
           ))}
         </div>
       </div>
-      <button
-        className="mx-auto mb-5 block rounded-xl border-4 border-red500 px-4 py-2 text-3xl text-red500 disabled:opacity-30"
+      <Button
+        name={'Play'}
+        className={
+          'mx-auto mb-5 block rounded-xl border-4 border-red500 px-4 py-2 text-3xl text-red500 disabled:opacity-30'
+        }
         onClick={() => setSelectTopicScreen(false)}
         disabled={topic.id == 0 ? true : false}
-      >
-        Play
-      </button>
+      />
     </section>
   );
 }

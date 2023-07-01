@@ -1,3 +1,5 @@
+import { Button } from '..';
+
 interface Props {
   youWin: boolean;
   youLose: boolean;
@@ -11,7 +13,7 @@ export default (function Modal({
   youLose,
   outOfWord,
   handleContinue,
-  handleQuit,
+  handleQuit
 }: Props) {
   return (
     <div className="absolute inset-0 z-10 origin-center animate-opacity-bg backdrop-blur-[2px]">
@@ -28,19 +30,17 @@ export default (function Modal({
         )}
         <div className="item-center mt-2 flex gap-14 font-semibold">
           {!outOfWord && (
-            <button
-              onClick={handleContinue}
+            <Button
+              name={'Continue'}
               className="hover:glowing border-4 border-white px-4 py-2 text-white shadow-inner hover:shadow-current"
-            >
-              Continue
-            </button>
+              onClick={handleContinue}
+            />
           )}
-          <button
-            onClick={handleQuit}
+          <Button
+            name={'Quit Game'}
             className="hover:glowing border-4 border-white px-4 py-2 text-white shadow-inner hover:shadow-current"
-          >
-            Quit Game
-          </button>
+            onClick={handleQuit}
+          />
         </div>
       </div>
     </div>

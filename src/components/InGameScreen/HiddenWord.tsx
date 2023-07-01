@@ -7,7 +7,7 @@ interface Props {
 export default function HiddenWord({
   wordToGuess,
   guessedLetters,
-  youLose,
+  youLose
 }: Props) {
   return (
     <section className="container mt-12">

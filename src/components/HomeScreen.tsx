@@ -1,3 +1,4 @@
+import { Button } from '.';
 import { hangman, hangman_left, hangman_right } from '../assets/image';
 
 interface Props {
@@ -19,12 +20,11 @@ export default function HomeScreen({ handleStarGame }: Props) {
           </div>
           <img src={hangman_right} className="animate-opacity-bg" />
         </div>
-        <button
+        <Button
+          name={'Start'}
+          className={'hover:glowing mx-auto mt-20 block text-6xl text-red-500'}
           onClick={handleStarGame}
-          className="hover:glowing mx-auto mt-20 block text-6xl text-red-500"
-        >
-          Start
-        </button>
+        />
       </div>
     </section>
   );

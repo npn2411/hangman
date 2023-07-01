@@ -13,10 +13,10 @@ interface Props {
 export default function InGameScreen({
   topic,
   setGameStart,
-  setSelectTopicScreen,
+  setSelectTopicScreen
 }: Props) {
   const [wordToGuess, setWordToGuess] = useState<string>(() =>
-    generateRandomWord(topic),
+    generateRandomWord(topic)
   );
   const [guessedWords, setGuessedWords] = useState<string[]>([]);
   const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
