@@ -1,5 +1,5 @@
 module.exports = {
-  trailingComma: 'all',
+  trailingComma: 'none',
   tabWidth: 2,
   printWidth: 80,
   useTabs: false,
@@ -8,7 +8,6 @@ module.exports = {
   quoteProps: 'as-needed',
   bracketSpacing: true,
   arrowParens: 'always',
-  jsxBracketSameLine: false,
   tailwindConfig: './tailwind.config.js',
   overrides: [
     {
