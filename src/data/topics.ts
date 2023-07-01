@@ -6,7 +6,7 @@ import {
   countries,
   home,
   fruits,
-  transport,
+  transport
 } from '@/assets/image';
 
 export const topics = [
@@ -47,8 +47,8 @@ export const topics = [
       'rhino',
       'cheetah',
       'elephant',
-      'zebra',
-    ],
+      'zebra'
+    ]
   },
   {
     id: 2,
@@ -80,8 +80,8 @@ export const topics = [
       'fencing',
       'handball',
       'bowling',
-      'billards',
-    ],
+      'billards'
+    ]
   },
   {
     id: 3,
@@ -117,8 +117,8 @@ export const topics = [
       'toe',
       'chin',
       'eyebrow',
-      'stomach',
-    ],
+      'stomach'
+    ]
   },
   {
     id: 4,
@@ -149,8 +149,8 @@ export const topics = [
       'computer technician',
       'dancer',
       'waiter',
-      'actress',
-    ],
+      'actress'
+    ]
   },
   {
     id: 5,
@@ -183,8 +183,8 @@ export const topics = [
       'russia',
       'sweden',
       'ghana',
-      'south Africa',
-    ],
+      'south Africa'
+    ]
   },
   {
     id: 6,
@@ -222,8 +222,8 @@ export const topics = [
       'shower',
       'sink',
       'washing machine',
-      'vacuum cleaner',
-    ],
+      'vacuum cleaner'
+    ]
   },
   {
     id: 7,
@@ -248,8 +248,8 @@ export const topics = [
       'papaya',
       'cherry',
       'avocado',
-      'star fruit',
-    ],
+      'star fruit'
+    ]
   },
   {
     id: 8,
@@ -278,12 +278,12 @@ export const topics = [
       'car',
       'subway',
       'roadster',
-      'fire engine',
+      'fire engine'
       // 'a b c',
       // 'abcd',
       // 'abcde',
-    ],
-  },
+    ]
+  }
 ];
 
 export default topics;
